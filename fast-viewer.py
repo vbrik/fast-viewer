@@ -1,12 +1,12 @@
-#!/usr/bin/env python
-"""Fast image viewer"""
+#!/usr/bin/python
 from __future__ import division
 from __future__ import print_function
 import sys
 import os
-from PyQt4 import QtCore, QtGui
-from PyQt4.QtCore import Qt
-from PyQt4.QtGui import *
+from PyQt5 import QtCore, QtGui
+from PyQt5.QtCore import Qt
+from PyQt5.QtGui import *
+from PyQt5.QtWidgets import *
 import time
 from collections import namedtuple, OrderedDict
 import PIL.Image
@@ -58,10 +58,10 @@ class ImageViewerX(QMainWindow):
         else:
             self.timer.stop()
             return
-        if len(self.pixmaps) < 100:
+        if len(self.pixmaps) < 200:
             self.timer.setInterval(1)
         elif len(self.pixmaps) < 300:
-            self.timer.setInterval(800)
+            self.timer.setInterval(400)
         elif len(self.pixmaps) < 350:
             self.timer.setInterval(1200)
         else:

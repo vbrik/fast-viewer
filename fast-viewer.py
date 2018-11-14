@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python2.7
 from __future__ import division
 from __future__ import print_function
 import sys
@@ -58,10 +58,10 @@ class ImageViewerX(QMainWindow):
         else:
             self.timer.stop()
             return
-        if len(self.pixmaps) < 200:
+        if len(self.pixmaps) < 400:
             self.timer.setInterval(1)
-        elif len(self.pixmaps) < 300:
-            self.timer.setInterval(400)
+        elif len(self.pixmaps) < 600:
+            self.timer.setInterval(800)
         elif len(self.pixmaps) < 350:
             self.timer.setInterval(1200)
         else:
@@ -112,7 +112,7 @@ def main():
     app.setOverrideCursor(QCursor(Qt.BlankCursor))
     imageViewer = ImageViewerX(files, 
                     QDesktopWidget().screenGeometry().width(),
-                    1200)
+                    1400)
     imageViewer.show()
     return app.exec_()
 

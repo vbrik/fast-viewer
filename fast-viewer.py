@@ -1,6 +1,5 @@
-#!/usr/bin/python2.7
-from __future__ import division
-from __future__ import print_function
+#!/usr/bin/python
+import shutil
 import sys
 import os
 from PyQt5 import QtCore, QtGui
@@ -72,6 +71,9 @@ class ImageViewerX(QMainWindow):
         if key in (Qt.Key_Escape, Qt.Key_Q):
             self.close()
         else:
+            if key == Qt.Key_C:
+                shutil.copy2(self.filenames[self.index], '/tmp')
+                print('Copied %s to /tmp' % self.filenames[self.index])
             if key == Qt.Key_Delete:
                 os.rename(self.filenames[self.index], '_' + self.filenames[self.index])
                 self.deleted.append(self.filenames[self.index])

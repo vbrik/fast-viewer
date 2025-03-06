@@ -52,19 +52,20 @@ class ImageViewerX(QMainWindow):
         if len(self.pixmaps) < len(self.filenames):
             name = self.filenames[len(self.pixmaps)]
             im = QImage(name)
-            im = im.scaledToHeight(self.height, Qt.FastTransformation)
+            im = im.scaledToHeight(self.height, Qt.SmoothTransformation)
             self.pixmaps.append(QPixmap.fromImage(im))
         else:
             self.timer.stop()
             return
-        if len(self.pixmaps) < 400:
-            self.timer.setInterval(1)
-        elif len(self.pixmaps) < 600:
-            self.timer.setInterval(800)
-        elif len(self.pixmaps) < 350:
-            self.timer.setInterval(1200)
-        else:
-            self.timer.setInterval(2000)
+        self.timer.setInterval(1)
+#        if len(self.pixmaps) < 400:
+#            self.timer.setInterval(1)
+#        elif len(self.pixmaps) < 600:
+#            self.timer.setInterval(800)
+#        elif len(self.pixmaps) < 350:
+#            self.timer.setInterval(1200)
+#        else:
+#            self.timer.setInterval(2000)
 
     def keyPressEvent(self, event):
         key = event.key()
@@ -72,8 +73,8 @@ class ImageViewerX(QMainWindow):
             self.close()
         else:
             if key == Qt.Key_C:
-                shutil.copy2(self.filenames[self.index], '/tmp')
-                print('Copied %s to /tmp' % self.filenames[self.index])
+                shutil.copy2(self.filenames[self.index], '/tmp/save')
+                print('Copied %s to /tmp/save' % self.filenames[self.index])
             if key == Qt.Key_Delete:
                 os.rename(self.filenames[self.index], '_' + self.filenames[self.index])
                 self.deleted.append(self.filenames[self.index])
@@ -114,7 +115,7 @@ def main():
     app.setOverrideCursor(QCursor(Qt.BlankCursor))
     imageViewer = ImageViewerX(files, 
                     QDesktopWidget().screenGeometry().width(),
-                    1400)
+                    1200)
     imageViewer.show()
     return app.exec_()
 
